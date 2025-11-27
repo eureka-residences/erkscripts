@@ -1,4 +1,4 @@
-from erk_scripts import ERKSCRIPTS
+from erk_scripts import lib
 
 def create_operation_categories(erkscript):
     categories = [

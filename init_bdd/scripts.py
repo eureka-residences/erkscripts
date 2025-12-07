@@ -174,15 +174,16 @@ def create_units(erkscript):
     ut_chambre = erkscript.get_unit_types({ "search": "CHAMBRE" })[0]
     ut_local_technique = erkscript.get_unit_types({ "search": "LOCAL_TECHNIQUE" })[0]
     ut_point_access_wifi = erkscript.get_unit_types({ "search": "POINT_ACCESS_WIFI" })[0]
+    ut_salle_etude = erkscript.get_unit_types({"search": "SALLE_ETUDE"})[0]
 
-    """
+    
     units = [
         {
             "floor": floors[0].get("id"),
-            "unit_type": ut_chambre.get("id"),
+            "unit_type": ut_salle_etude.get("id"),
             "identifier": "ERK-H1",
             "name": f"Salle d'étude - Eureka RDC",
-            "current_status": "OCCUPIED"
+            "current_status": "AVAILABLE"
         },
         {
             "floor": floors[0].get("id"),
@@ -263,30 +264,7 @@ def create_units(erkscript):
         },
     ]
     
-        for user in users:
-        is_rdc = "eureka-h" in user.get("email")
-        floor_id = floors[0].get("id") if is_rdc else floors[1].get("id")
-        current_occupant_id = user.get("id")
-
-        room_from_email = user.get("email").split('-')[1].split('@')[0]
-        room_id = f"ERK-{room_from_email.upper()}"
-        room_name = f"Chambre N°{room_from_email[1]} - EUREKA {"RDC" if is_rdc else "Etage 1"}"
-
-        units.append({
-            "floor": floor_id,
-            "unit_type": ut_chambre.get("id"),
-            "identifier": room_id,
-            "name": room_name,
-            "current_status": "OCCUPIED",
-            "current_occupant": current_occupant_id,
-            "area_m2": 15
-        })
-
-    """
-
-    units = []
-
-    for user in range(1, 10):
+    for user in users:
         is_rdc = "eureka-h" in user.get("email")
         floor_id = floors[0].get("id") if is_rdc else floors[1].get("id")
         current_occupant_id = user.get("id")
@@ -372,15 +350,15 @@ def main():
     # Credentials - À MODIFIER
     erkscript.authenticate({"email": "wilfried@eurekanet.com", "password": "mon_super_motdepasse"})
 
-    # create_users(erkscript)
-    # create_buildings(erkscript)
-    # create_floors(erkscript)
-    # create_unit_types(erkscript)
-    # create_units(erkscript)
-    # create_operation_categories(erkscript)
-    # create_operation_types(erkscript)
-    # create_contacts(erkscript)
-    # create_tenants(erkscript)
+    # 1. create_users(erkscript)
+    # 2. create_buildings(erkscript)
+    # 3. create_floors(erkscript)
+    # 4. create_unit_types(erkscript)
+    # 5. create_operation_categories(erkscript)
+    # 6. create_operation_types(erkscript)
+    # 7. create_contacts(erkscript)
+    # 8. create_tenants(erkscript)
+    # 9. create_units(erkscript)
 
 
 if __name__ == "__main__":
